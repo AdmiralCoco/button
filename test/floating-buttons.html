@@ -4,9 +4,8 @@
 		<meta charset="UTF-8">
 		<title>d2l-floating-buttons basic tests</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<script src="../../web-component-tester/browser.js"></script>
-		<link rel="import" href="../d2l-floating-buttons.html">
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script src="../../wct-browser-legacy/browser.js"></script>
 	</head>
 	<body>
 		<test-fixture id="d2l-floating-buttons-fixture">
@@ -17,7 +16,8 @@
 			</template>
 		</test-fixture>
 
-		<script>
+		<script type="module">
+		import '../d2l-floating-buttons.js';
 
 		var atMost555px = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) <= 555;
 
@@ -102,16 +102,12 @@
 			});
 
 			it('floats if buttons are above fold when alwas-float is set to true', function() {
-			  floatingButtons.setAttribute('always-float', 'true');
-			  window.dispatchEvent(new Event('resize'));
-			  expect(floatingButtons.isFloating()).to.be.true;
+				floatingButtons.setAttribute('always-float', 'true');
+				window.dispatchEvent(new Event('resize'));
+				expect(floatingButtons.isFloating()).to.be.true;
 			});
 
 		});
-
-		</script>
-		<script>
-			a11ySuite('d2l-floating-buttons-fixture');
 		</script>
 	</body>
 </html>

@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-- 9
+  - 9
 script:
-- npm run test:lint
-- polymer test --skip-plugin local
-- npm run test:galen:sauce
+  - 'npm run test:lint'
+  - polymer test --module-resolution=node --npm --skip-plugin local
+  - 'npm run test:galen:sauce'
 addons:
   apt:
     packages:
@@ -12,8 +12,9 @@ addons:
   jwt:
     secure: ZQBYlWsBEcVRaELtWWaUi9ouZaRdc+GqyBDHmv+H/IlnGinMJLcUD0tRfFD3n5pVvDVuRXGaHMw7kaF0CM0bd4BJGqV2aWL+erBkMGjEDdIcqxFgqDMzdgGgdDyl+dYhPIAPPUe3L2sPffXcIrAwYmW66iOgkInJiExggqViTaY=
 before_install:
-- export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-- export PATH=$JAVA_HOME/bin:$PATH
+  - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+  - 'export PATH=$JAVA_HOME/bin:$PATH'
 env:
   global:
     SAUCE_USERNAME: Desire2Learn
+

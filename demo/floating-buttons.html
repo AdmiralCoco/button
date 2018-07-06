@@ -4,18 +4,12 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 		<title>d2l-floating-buttons - d2l-buttons demo</title>
-		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-		<link rel="import" href="../../d2l-typography/d2l-typography.html">
-		<link rel="import" href="../d2l-button.html">
-		<link rel="import" href="../d2l-floating-buttons.html">
-		<custom-style>
-			<style is="custom-style" include="demo-pages-shared-styles"></style>
-		</custom-style>
-		<custom-style include="d2l-typography">
-			<style is="custom-style" include="d2l-typography"></style>
-		</custom-style>
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script type="module" src="../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+		<script type="module" src="../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
+		<script type="module" src="../../d2l-typography/d2l-typography.js"></script>
+		<script type="module" src="../d2l-button.js"></script>
+		<script type="module" src="../d2l-floating-buttons.js"></script>
 		<style>
 			html {
 				font-size: 20px;
@@ -23,9 +17,15 @@
 			.content {
 				padding: 1rem;
 			}
-			</style>
+		</style>
 	</head>
 	<body unresolved class="d2l-typography">
+		<custom-style>
+			<style is="custom-style" include="demo-pages-shared-styles"></style>
+		</custom-style>
+		<custom-style include="d2l-typography">
+			<style is="custom-style" include="d2l-typography"></style>
+		</custom-style>
 
 		<h3>Floating Buttons</h3>
 
@@ -35,7 +35,6 @@
 		<d2l-button onclick="removeButton();">Remove Last Button</d2l-button>
 		<d2l-button onclick="insertContentAbove();">Insert Content</d2l-button>
 		<d2l-button onclick="removeContentAbove();">Remove Content</d2l-button>
-
 		<demo-snippet>
 			<template>
 				<div class="content">
@@ -47,61 +46,68 @@
 				</d2l-floating-buttons>
 			</template>
 		</demo-snippet>
+		<script type="module">
+/* eslint-disable no-unused-vars */
+import { dom } from '../../@polymer/polymer/lib/legacy/polymer.dom.js';
 
-		<script>
+var page_buttonCount = 0;
+var page_floatingButtons;
 
-			var page_buttonCount = 0;
-			var page_floatingButtons;
+function appendFloatingButtons() {
+	document.body.appendChild(page_floatingButtons);
+}
+window.appendFloatingButtons = appendFloatingButtons;
 
-			function appendFloatingButtons() {
-				document.body.appendChild(page_floatingButtons);
-			}
+function removeFloatingButtons() {
+	var floatingButtons = document.getElementById('wc_buttons');
+	page_floatingButtons = floatingButtons;
+	floatingButtons.parentNode.removeChild(floatingButtons);
+}
+window.removeFloatingButtons = removeFloatingButtons;
 
-			function removeFloatingButtons() {
-				var floatingButtons = document.getElementById('wc_buttons');
-				page_floatingButtons = floatingButtons;
-				floatingButtons.parentNode.removeChild(floatingButtons);
-			}
+function appendButton() {
+	var floatingButtons = document.getElementById('wc_buttons');
 
-			function appendButton() {
-				var floatingButtons = document.getElementById('wc_buttons');
+	page_buttonCount += 1;
 
-				page_buttonCount += 1;
+	var newButton = document.createElement('d2l-button');
+	newButton.textContent = 'Beer ' + page_buttonCount;
+	newButton.addEventListener('click', function() {
+		console.log('you clicked ' + this.textContent); /* eslint-disable-line */
+	});
 
-				var newButton = document.createElement('d2l-button');
-				newButton.textContent = 'Beer ' + page_buttonCount;
-				newButton.addEventListener('click', function() {
-					console.log('you clicked ' + this.textContent);
-				});
+	//floatingButtons.appendChild(newButton);
+	dom(floatingButtons).appendChild(newButton);
+}
+window.appendButton = appendButton;
 
-				//floatingButtons.appendChild(newButton);
-				Polymer.dom(floatingButtons).appendChild(newButton);
-			}
+function removeButton() {
+	var floatingButtons = document.getElementById('wc_buttons');
 
-			function removeButton() {
-				var floatingButtons = document.getElementById('wc_buttons');
+	dom(floatingButtons).removeChild(
+		dom(floatingButtons).lastChild
+	);
+}
+window.removeButton = removeButton;
 
-				Polymer.dom(floatingButtons).removeChild(
-					Polymer.dom(floatingButtons).lastChild
-				);
-			}
+function insertContentAbove() {
+	var newContent = document.createElement('p');
+	newContent.textContent = 'I love beer!';
+	document.body.querySelector('.content').appendChild(newContent);
+}
+window.insertContentAbove = insertContentAbove;
 
-			function insertContentAbove() {
-				var newContent = document.createElement('p');
-				newContent.textContent = 'I love beer!';
-				document.body.querySelector('.content').appendChild(newContent);
-			}
+function removeContentAbove() {
+	document.body.querySelector('.content').removeChild(
+		document.body.querySelector('.content').lastChild
+	);
+}
+window.removeContentAbove = removeContentAbove;
 
-			function removeContentAbove() {
-				document.body.querySelector('.content').removeChild(
-					document.body.querySelector('.content').lastChild
-				);
-			}
-
-			function makeMoreBeer() {
-				appendButton();
-			}
-
-		</script>
+function makeMoreBeer() {
+	appendButton();
+}
+window.makeMoreBeer = makeMoreBeer;
+</script>
 	</body>
 </html>

@@ -1,18 +1,15 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../d2l-colors/d2l-colors.html">
-<link rel="import" href="../d2l-icons/d2l-icons.html">
-<link rel="import" href="../d2l-polymer-behaviors/d2l-focusable-behavior.html">
-<link rel="import" href="d2l-button-shared-styles.html">
-<link rel="import" href="d2l-button-behavior.html">
+import '../@polymer/polymer/polymer-legacy.js';
 
-<!--
-`d2l-button-icon`
-Polymer-based web component for icon buttons
+import '../d2l-colors/d2l-colors.js';
+import '../d2l-icons/d2l-icons.js';
+import { FocusableBehavior } from '../d2l-polymer-behaviors/d2l-focusable-behavior.js';
+import './d2l-button-shared-styles.js';
+import { ButtonBehavior } from './d2l-button-behavior.js';
+import { Polymer } from '../@polymer/polymer/lib/legacy/polymer-fn.js';
+const $_documentContainer = document.createElement('template');
+$_documentContainer.setAttribute('style', 'display: none;');
 
-@demo demo/button-icon.html d2l-button-icon
--->
-
-<dom-module id="d2l-button-icon">
+$_documentContainer.innerHTML = `<dom-module id="d2l-button-icon">
 	<template strip-whitespace>
 		<style>
 			:host {
@@ -90,45 +87,52 @@ Polymer-based web component for icon buttons
 			<d2l-icon icon=[[icon]] class="d2l-button-icon"></d2l-icon>
 		</button>
 	</template>
-	<script>
-		Polymer({
-			is: 'd2l-button-icon',
 
-			properties: {
+</dom-module>`;
 
-				/**
-				 * Name of icon (ex. [iconset-name:icon-id]) for underlying [Polymer iron-iconset-svg](https://github.com/PolymerElements/iron-iconset-svg) (required).
-				 */
-				icon: {
-					type: String,
-					reflectToAttribute: true
-				},
+document.head.appendChild($_documentContainer.content);
+/**
+`d2l-button-icon`
+Polymer-based web component for icon buttons
 
-				/**
-				 * Text to display in aria-label (required)
-				 */
-				text: {
-					type: String,
-					reflectToAttribute: true
-				},
+@demo demo/button-icon.html d2l-button-icon
+*/
+Polymer({
+	is: 'd2l-button-icon',
 
-				/**
-				 * Horizontal alignment of button. Options:
-				 * 	"text" -  The button icon will left align with the page content
-				 *	default - The button's edge (including padding) will left align with the page content
-				*/
-				hAlign: {
-					type: String,
-					reflectToAttribute: true
-				}
+	properties: {
 
-			},
+		/**
+		 * Name of icon (ex. [iconset-name:icon-id]) for underlying [Polymer iron-iconset-svg](https://github.com/PolymerElements/iron-iconset-svg) (required).
+		 */
+		icon: {
+			type: String,
+			reflectToAttribute: true
+		},
 
-			behaviors: [
-				D2L.PolymerBehaviors.Button.Behavior,
-				D2L.PolymerBehaviors.FocusableBehavior
-			]
+		/**
+		 * Text to display in aria-label (required)
+		 */
+		text: {
+			type: String,
+			reflectToAttribute: true
+		},
 
-		});
-	</script>
-</dom-module>
+		/**
+		 * Horizontal alignment of button. Options:
+		 *	 "text" -  The button icon will left align with the page content
+		 *	default - The button's edge (including padding) will left align with the page content
+		*/
+		hAlign: {
+			type: String,
+			reflectToAttribute: true
+		}
+
+	},
+
+	behaviors: [
+		ButtonBehavior,
+		FocusableBehavior
+	]
+
+});

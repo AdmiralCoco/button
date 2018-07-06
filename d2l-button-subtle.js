@@ -1,19 +1,16 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../d2l-colors/d2l-colors.html">
-<link rel="import" href="../d2l-icons/d2l-icons.html">
-<link rel="import" href="../d2l-polymer-behaviors/d2l-focusable-behavior.html">
-<link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
-<link rel="import" href="d2l-button-shared-styles.html">
-<link rel="import" href="d2l-button-behavior.html">
+import '../@polymer/polymer/polymer-legacy.js';
 
-<!--
-`d2l-button-subtle`
-Polymer-based web component for subtle buttons
+import '../d2l-colors/d2l-colors.js';
+import '../d2l-icons/d2l-icons.js';
+import { FocusableBehavior } from '../d2l-polymer-behaviors/d2l-focusable-behavior.js';
+import '../d2l-typography/d2l-typography-shared-styles.js';
+import './d2l-button-shared-styles.js';
+import { ButtonBehavior } from './d2l-button-behavior.js';
+import { Polymer } from '../@polymer/polymer/lib/legacy/polymer-fn.js';
+const $_documentContainer = document.createElement('template');
+$_documentContainer.setAttribute('style', 'display: none;');
 
-@demo demo/button-subtle.html d2l-button-subtle
--->
-
-<dom-module id="d2l-button-subtle">
+$_documentContainer.innerHTML = `<dom-module id="d2l-button-subtle">
 	<template strip-whitespace>
 		<style>
 			:host {
@@ -134,54 +131,61 @@ Polymer-based web component for subtle buttons
 			<span class="d2l-button-subtle-content">[[text]]</span>
 		</button>
 	</template>
-	<script>
-		Polymer({
-			is: 'd2l-button-subtle',
 
-			properties: {
+</dom-module>`;
 
-				/**
-				 * Name of icon (ex. [iconset-name:icon-id]) for underlying [Polymer iron-iconset-svg](https://github.com/PolymerElements/iron-iconset-svg) (optional).
-				 */
-				icon: {
-					type: String,
-					value: null,
-					reflectToAttribute: true
-				},
+document.head.appendChild($_documentContainer.content);
+/**
+`d2l-button-subtle`
+Polymer-based web component for subtle buttons
 
-				/**
-				 * Display the icon to the right of text when true
-				 */
-				iconRight: {
-					type: Boolean,
-					value: false,
-					reflectToAttribute: true
-				},
+@demo demo/button-subtle.html d2l-button-subtle
+*/
+Polymer({
+	is: 'd2l-button-subtle',
 
-				/**
-				 * Text to display in the button (required)
-				 */
-				text: {
-					type: String,
-					reflectToAttribute: true
-				},
+	properties: {
 
-				/**
-				 * Horizontal alignment of button. Options:
-				 * 	"text" -  The button icon or text will left align with the page content
-				 *	default - The button's edge (including padding) will left align with the page content
-				*/
-				hAlign: {
-					type: String,
-					reflectToAttribute: true
-				}
+		/**
+		 * Name of icon (ex. [iconset-name:icon-id]) for underlying [Polymer iron-iconset-svg](https://github.com/PolymerElements/iron-iconset-svg) (optional).
+		 */
+		icon: {
+			type: String,
+			value: null,
+			reflectToAttribute: true
+		},
 
-			},
+		/**
+		 * Display the icon to the right of text when true
+		 */
+		iconRight: {
+			type: Boolean,
+			value: false,
+			reflectToAttribute: true
+		},
 
-			behaviors: [
-				D2L.PolymerBehaviors.Button.Behavior,
-				D2L.PolymerBehaviors.FocusableBehavior
-			]
-		});
-	</script>
-</dom-module>
+		/**
+		 * Text to display in the button (required)
+		 */
+		text: {
+			type: String,
+			reflectToAttribute: true
+		},
+
+		/**
+		 * Horizontal alignment of button. Options:
+		 *	 "text" -  The button icon or text will left align with the page content
+		 *	default - The button's edge (including padding) will left align with the page content
+		*/
+		hAlign: {
+			type: String,
+			reflectToAttribute: true
+		}
+
+	},
+
+	behaviors: [
+		ButtonBehavior,
+		FocusableBehavior
+	]
+});

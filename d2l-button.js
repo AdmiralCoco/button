@@ -1,18 +1,15 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../d2l-colors/d2l-colors.html">
-<link rel="import" href="../d2l-polymer-behaviors/d2l-focusable-behavior.html">
-<link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
-<link rel="import" href="d2l-button-shared-styles.html">
-<link rel="import" href="d2l-button-behavior.html">
+import '../@polymer/polymer/polymer-legacy.js';
 
-<!--
-`d2l-button`
-Polymer-based web component for buttons
+import '../d2l-colors/d2l-colors.js';
+import { FocusableBehavior } from '../d2l-polymer-behaviors/d2l-focusable-behavior.js';
+import '../d2l-typography/d2l-typography-shared-styles.js';
+import './d2l-button-shared-styles.js';
+import { ButtonBehavior } from './d2l-button-behavior.js';
+import { Polymer } from '../@polymer/polymer/lib/legacy/polymer-fn.js';
+const $_documentContainer = document.createElement('template');
+$_documentContainer.setAttribute('style', 'display: none;');
 
-@demo demo/button.html d2l-button
--->
-
-<dom-module id="d2l-button">
+$_documentContainer.innerHTML = `<dom-module id="d2l-button">
 	<template strip-whitespace>
 		<style>
 			:host {
@@ -91,18 +88,24 @@ Polymer-based web component for buttons
 			formnovalidate$=[[formnovalidate]]
 			formtarget$=[[formtarget]]
 			name$=[[name]]
-			type$=[[type]]
-		><slot></slot></button>
+			type$=[[type]]><slot></slot></button>
 	</template>
-	<script>
-		Polymer({
-			is: 'd2l-button',
 
-			behaviors: [
-				D2L.PolymerBehaviors.Button.Behavior,
-				D2L.PolymerBehaviors.FocusableBehavior
-			]
+</dom-module>`;
 
-		});
-	</script>
-</dom-module>
+document.head.appendChild($_documentContainer.content);
+/**
+`d2l-button`
+Polymer-based web component for buttons
+
+@demo demo/button.html d2l-button
+*/
+Polymer({
+	is: 'd2l-button',
+
+	behaviors: [
+		ButtonBehavior,
+		FocusableBehavior
+	]
+
+});

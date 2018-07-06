@@ -1,24 +1,17 @@
-<link rel="import" href="../polymer/polymer.html">
-<script>
-
-window.D2L = window.D2L || {};
-window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
-window.D2L.PolymerBehaviors.Button = window.D2L.PolymerBehaviors.Button || {};
-
 /** @polymerBehavior */
-D2L.PolymerBehaviors.Button.Behavior = {
+export const ButtonBehavior = {
 	properties: {
 
 		/**
-		 * Whether the button is the primary button.
-		 */
+         * Whether the button is the primary button.
+         */
 		primary: {
 			type: Boolean,
 			reflectToAttribute: true
 		},
 		/**
-		 * Standard HTML disabled.
-		 */
+         * Standard HTML disabled.
+         */
 		disabled: {
 			type: Boolean,
 			reflectToAttribute: true
@@ -44,57 +37,57 @@ D2L.PolymerBehaviors.Button.Behavior = {
 			reflectToAttribute: true
 		},
 		/**
-		 * Standard HTML form.
-		 */
+         * Standard HTML form.
+         */
 		form: {
 			type: String,
 			reflectToAttribute: true
 		},
 		/**
-		 * Standard HTML formaction.
-		 */
+         * Standard HTML formaction.
+         */
 		formaction: {
 			type: String,
 			reflectToAttribute: true
 		},
 		/**
-		 * Standard HTML formenctype.
-		 */
+         * Standard HTML formenctype.
+         */
 		formenctype: {
 			type: String,
 			reflectToAttribute: true
 		},
 		/**
-		 * Standard HTML formmethod.
-		 */
+         * Standard HTML formmethod.
+         */
 		formmethod: {
 			type: String,
 			reflectToAttribute: true
 		},
 		/**
-		 * Standard HTML formnovalidate.
-		 */
+         * Standard HTML formnovalidate.
+         */
 		formnovalidate: {
 			type: String,
 			reflectToAttribute: true
 		},
 		/**
-		 * Standard HTML formtarget.
-		 */
+         * Standard HTML formtarget.
+         */
 		formtarget: {
 			type: String,
 			reflectToAttribute: true
 		},
 		/**
-		 * Standard HTML name.
-		 */
+         * Standard HTML name.
+         */
 		name: {
 			type: String,
 			reflectToAttribute: true
 		},
 		/**
-		 * Standard HTML type.
-		 */
+         * Standard HTML type.
+         */
 		type: {
 			type: String,
 			reflectToAttribute: true
@@ -103,5 +96,3 @@ D2L.PolymerBehaviors.Button.Behavior = {
 	}
 
 };
-
-</script>
