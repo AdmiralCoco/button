@@ -1,14 +1,4 @@
 {
   "parser": "babel-eslint",
-  "globals": {
-    "fixture": false,
-    "describe": false,
-    "expect": false,
-    "it": false,
-    "beforeEach": false,
-    "afterEach": false,
-    "suite": false,
-    "MockInteractions": false,
-    "WCT": false
-  }
+  "extends": "brightspace/wct-config"
 }

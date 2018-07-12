@@ -18,6 +18,11 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button-icon">
 				--d2l-button-icon-border-radius: 0.3rem;
 				--d2l-button-icon-min-height: calc(2rem + 2px);
 				--d2l-button-icon-min-width: calc(2rem + 2px);
+
+				--button-rtl: {
+					left: 0;
+					right: calc(((var(--d2l-button-icon-min-width) - 0.9rem) / 2) * -1);
+				}
 			}
 			button {
 				background-color: transparent;
@@ -34,13 +39,17 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button-icon">
 			:host([h-align="text"]) button {
 				left: calc(((var(--d2l-button-icon-min-width) - 0.9rem) / 2) * -1);
 			}
+			:host-context([dir="rtl"])[h-align="text"] button {
+				@apply --button-rtl;
+			}
+			:host-context([dir="rtl"]):host([h-align="text"]) button {
+				@apply --button-rtl;
+			}
 			:host(:dir(rtl))[h-align="text"] button {
-				left: 0;
-				right: calc(((var(--d2l-button-icon-min-width) - 0.9rem) / 2) * -1);
+				@apply --button-rtl;
 			}
 			:host(:host-context([dir="rtl"])[h-align="text"]) button {
-				left: 0;
-				right: calc(((var(--d2l-button-icon-min-width) - 0.9rem) / 2) * -1);
+				@apply --button-rtl;
 			}
 
 			/* Firefox includes a hidden border which messes up button dimensions */

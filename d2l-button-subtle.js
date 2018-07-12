@@ -15,6 +15,26 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button-subtle">
 		<style>
 			:host {
 				display: inline-block;
+
+				--button-rtl: {
+					left: 0;
+					right: -0.6rem;
+				};
+
+				--content-icon-rtl: {
+					padding-left: 0;
+					padding-right: 1.2rem;
+				};
+
+				--content-icon-right-rtl: {
+					padding-left: 1.2rem;
+					padding-right: 0;
+				};
+
+				--icon-right-rtl: {
+					left: 0.6rem;
+					right: initial;
+				};
 			}
 			button {
 				background-color: transparent;
@@ -30,13 +50,17 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button-subtle">
 			:host([h-align="text"]) button {
 				left: -0.6rem;
 			}
+			:host-context([dir="rtl"])[h-align="text"] button {
+				@apply --button-rtl;
+			}
+			:host-context([dir="rtl"]):host([h-align="text"]) button {
+				@apply --button-rtl;
+			}
 			:host(:dir(rtl))[h-align="text"] button {
-				left: 0;
-				right: -0.6rem;
+				@apply --button-rtl;
 			}
 			:host(:host-context([dir="rtl"])[h-align="text"]) button {
-				left: 0;
-				right: -0.6rem;
+				@apply --button-rtl;
 			}
 
 			/* Firefox includes a hidden border which messes up button dimensions */
@@ -67,21 +91,29 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button-subtle">
 				padding-left: 0;
 				padding-right: 1.2rem;
 			}
+			:host-context([dir="rtl"])[icon] .d2l-button-subtle-content {
+				@apply --content-icon-rtl;
+			}
+			:host-context([dir="rtl"]):host([icon]) .d2l-button-subtle-content {
+				@apply --content-icon-rtl;
+			}
 			:host(:dir(rtl))[icon] .d2l-button-subtle-content {
-				padding-left: 0;
-				padding-right: 1.2rem;
+				@apply --content-icon-rtl;
 			}
 			:host(:host-context([dir="rtl"])[icon]) .d2l-button-subtle-content {
-				padding-left: 0;
-				padding-right: 1.2rem;
+				@apply --content-icon-rtl;
+			}
+			:host-context([dir="rtl"])[icon][icon-right] .d2l-button-subtle-content {
+				@apply --content-icon-right-rtl;
+			}
+			:host-context([dir="rtl"]):host([icon][icon-right]) .d2l-button-subtle-content {
+				@apply --content-icon-right-rtl;
 			}
 			:host(:dir(rtl))[icon][icon-right] .d2l-button-subtle-content {
-				padding-left: 1.2rem;
-				padding-right: 0;
+				@apply --content-icon-right-rtl;
 			}
 			:host(:host-context([dir="rtl"])[icon][icon-right]) .d2l-button-subtle-content {
-				padding-left: 1.2rem;
-				padding-right: 0;
+				@apply --content-icon-right-rtl;
 			}
 
 			d2l-icon.d2l-button-subtle-icon {
@@ -99,13 +131,17 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button-subtle">
 			:host([icon][icon-right]) d2l-icon.d2l-button-subtle-icon {
 				right: 0.6rem;
 			}
+			:host-context([dir="rtl"])[icon][icon-right] d2l-icon.d2l-button-subtle-icon {
+				@apply --icon-right-rtl;
+			}
+			:host-context([dir="rtl"]):host([icon][icon-right]) d2l-icon.d2l-button-subtle-icon {
+				@apply --icon-right-rtl;
+			}
 			:host(:dir(rtl))[icon][icon-right] d2l-icon.d2l-button-subtle-icon {
-				left: 0.6rem;
-				right: initial;
+				@apply --icon-right-rtl;
 			}
 			:host(:host-context([dir="rtl"])[icon][icon-right]) d2l-icon.d2l-button-subtle-icon {
-				left: 0.6rem;
-				right: initial;
+				@apply --icon-right-rtl;
 			}
 			button[disabled] {
 				cursor: default;
