@@ -56,11 +56,14 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button-icon">
 			button::-moz-focus-inner {
 				border: 0;
 			}
-			button[disabled]:hover, button[disabled]:focus {
+			button[disabled]:hover,
+			button[disabled]:focus,
+			:host([active]) button[disabled] {
 				background-color: transparent;
 			}
 			button:hover,
 			button:focus,
+			:host([active]) button,
 			:host(.d2l-button-icon-hover) button,
 			:host(.d2l-button-icon-focus) button {
 				background-color: var(--d2l-color-gypsum);
@@ -136,7 +139,6 @@ Polymer({
 			type: String,
 			reflectToAttribute: true
 		}
-
 	},
 
 	behaviors: [

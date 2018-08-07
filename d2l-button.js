@@ -27,7 +27,10 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button">
 			button::-moz-focus-inner {
 				border: 0;
 			}
-			button, button[disabled]:hover, button[disabled]:focus {
+			button,
+			button[disabled]:hover,
+			button[disabled]:focus,
+			:host([active]) button[disabled] {
 				background-color: var(--d2l-color-regolith);
 				border-color: var(--d2l-color-mica);
 				color: var(--d2l-color-ferrite);
@@ -35,12 +38,13 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button">
 
 			button:hover,
 			button:focus,
+			:host([active]) button,
 			:host(.d2l-button-hover) button,
 			:host(.d2l-button-focus) button {
 				background-color: var(--d2l-color-gypsum);
 			}
 
-			button:hover, :host(.d2l-button-hover) button {
+			button:hover, :host(.d2l-button-hover) button, :host([active]) button {
 				@apply --d2l-button-hover;
 			}
 			button:focus, :host(.d2l-button-focus) button {
@@ -53,7 +57,8 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button">
 			}
 			:host([primary]) button,
 			:host([primary]) button[disabled]:hover,
-			:host([primary]) button[disabled]:focus {
+			:host([primary]) button[disabled]:focus,
+			:host([primary][active]) button[disabled] {
 				background-color: var(--d2l-color-celestine);
 				border-color: var(--d2l-color-celestine-minus-1);
 				color: #ffffff;
@@ -62,12 +67,15 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button">
 
 			:host([primary]) button:hover,
 			:host([primary]) button:focus,
+			:host([primary][active]) button,
 			:host([primary].d2l-button-hover) button,
 			:host([primary].d2l-button-focus) button {
 				background-color: var(--d2l-color-celestine-minus-1);
 			}
 
-			:host([primary]) button:hover, :host([primary].d2l-button-hover) button {
+			:host([primary]) button:hover,
+			:host([primary].d2l-button-hover) button,
+			:host([primary][active]) button {
 				@apply --d2l-button-primary-hover;
 			}
 			:host([primary]) button:focus, :host([primary].d2l-button-focus) button {

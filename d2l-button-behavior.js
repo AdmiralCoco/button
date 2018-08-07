@@ -9,6 +9,7 @@ export const ButtonBehavior = {
 			type: Boolean,
 			reflectToAttribute: true
 		},
+
 		/**
          * Standard HTML disabled.
          */
