@@ -1,8 +1,7 @@
-import '../@polymer/polymer/polymer-legacy.js';
-
 import '../d2l-colors/d2l-colors.js';
 import '../d2l-icons/d2l-icons.js';
 import { FocusableBehavior } from '../d2l-polymer-behaviors/d2l-focusable-behavior.js';
+import { VisibleOnAncestorBehavior } from '../d2l-polymer-behaviors/d2l-visible-on-ancestor-behavior.js';
 import './d2l-button-shared-styles.js';
 import { ButtonBehavior } from './d2l-button-behavior.js';
 import { Polymer } from '../@polymer/polymer/lib/legacy/polymer-fn.js';
@@ -11,10 +10,9 @@ $_documentContainer.setAttribute('style', 'display: none;');
 
 $_documentContainer.innerHTML = `<dom-module id="d2l-button-icon">
 	<template strip-whitespace>
-		<style>
+		<style include="d2l-visible-on-ancestor-styles">
 			:host {
 				display: inline-block;
-
 				--d2l-button-icon-border-radius: 0.3rem;
 				--d2l-button-icon-min-height: calc(2rem + 2px);
 				--d2l-button-icon-min-width: calc(2rem + 2px);
@@ -71,10 +69,29 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-button-icon">
 			button:focus, :host(.d2l-button-icon-focus) button {
 				@apply --d2l-button-focus-plus-border;
 			}
+
 			.d2l-button-icon {
 				height: 0.9rem;
 				width: 0.9rem;
 			}
+
+			:host([translucent]) button {
+				background-color: rgba(0,0,0,0.5);
+				transition: background-color 0.5s;
+			}
+			:host([translucent]) .d2l-button-icon {
+				color: white;
+			}
+			:host([active][translucent]) button,
+			:host([translucent].d2l-button-icon-hover) button,
+			:host([translucent].d2l-button-icon-focus) button,
+			:host([translucent]) button:hover,
+			:host([translucent]) button:focus {
+				border: none;
+				background-color: var(--d2l-color-celestine);
+				box-shadow: none;
+			}
+
 			button[disabled] {
 				cursor: default;
 				opacity: 0.5;
@@ -138,12 +155,22 @@ Polymer({
 		hAlign: {
 			type: String,
 			reflectToAttribute: true
+		},
+
+		/**
+				 * Whether the button is translucent.
+				 */
+		translucent: {
+			type: Boolean,
+			reflectToAttribute: true
 		}
+
 	},
 
 	behaviors: [
 		ButtonBehavior,
-		FocusableBehavior
+		FocusableBehavior,
+		VisibleOnAncestorBehavior
 	]
 
 });

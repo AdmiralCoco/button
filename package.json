@@ -23,10 +23,6 @@
     "test:polymer:sauce": "polymer test --npm --skip-plugin local",
     "test": "npm run lint && npm run test:polymer:local && npm run test:galen:local"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BrightspaceUI/button.git"
-  },
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
